@@ -245,16 +245,59 @@ public class Picture extends SimplePicture
     }
   }
   
-  
-  /* Main method for testing - each class in Java can have a main 
-   * method 
-   */
-  public static void main(String[] args) 
-  {
-    Picture beach = new Picture("beach.jpg");
-    beach.explore();
-    beach.zeroBlue();
-    beach.explore();
-  }
-  
+    public void mirrorVerticalRightToLeft() {
+	Pixel[][] pixels = this.getPixels2D();
+	Pixel leftPixel = null;
+	Pixel rightPixel = null;
+	int width = pixels[0].length;
+	for (int row = 0; row < pixels.length; row++)
+	    {
+		for (int col = 0; col < width / 2; col++)
+		    {
+			leftPixel = pixels[row][col];
+			rightPixel = pixels[row][width - 1 - col];
+			leftPixel.setColor(rightPixel.getColor());
+		    }
+	    }
+    }
+
+    public void mirrorHorizontal() {
+	Pixel[][] pixels = this.getPixels2D();
+	Pixel topPixel = null;
+	Pixel bottomPixel = null;
+	int height = pixels.length;
+	for (int row=height/2; row<height; row++) {
+	    for (int col=0; col<pixels[row].length; col++) {
+		bottomPixel = pixels[row][col];
+		topPixel = pixels[height-1-row][col];
+		bottomPixel.setColor(topPixel.getColor());
+	    }
+	}
+    }
+
+    public void mirrorHorizontalBotToTop() {
+		Pixel[][] pixels = this.getPixels2D();
+	Pixel topPixel = null;
+	Pixel bottomPixel = null;
+	int height = pixels.length;
+	for (int row=height/2; row<height; row++) {
+	    for (int col=0; col<pixels[row].length; col++) {
+		bottomPixel = pixels[row][col];
+		topPixel = pixels[height-1-row][col];
+		topPixel.setColor(bottomPixel.getColor());
+	    }
+	}
+    }
+    
+    /* Main method for testing - each class in Java can have a main 
+     * method 
+     */
+    public static void main(String[] args) 
+    {
+	Picture beach = new Picture("beach.jpg");
+	beach.explore();
+	beach.zeroBlue();
+	beach.explore();
+    }
+    
 } // this } is the end of class Picture, put all new methods before this
